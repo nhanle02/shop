@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Menu; 
+use App\Models\Menu;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Menu\CreateFormRequest;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use App\http\Services\Menu\MenuService;
+use App\Http\Services\Menu\MenuService;
 class MenuController extends Controller
-{   
+{
 
     protected $menuService;
 
@@ -22,7 +22,7 @@ class MenuController extends Controller
             'title' => 'Thêm danh mục mới',
             'menus' => $this->menuService->getParent(),
         ]);
-    }   
+    }
 
     public function store(CreateFormRequest $request) {
         $this->menuService->create($request);

@@ -13,7 +13,7 @@ class ProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -25,14 +25,15 @@ class ProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'file' => 'required',
+            'thumb' => 'required',
+//            'file' => 'required',
         ];
     }
 
     public function messages() {
         return [
             'name.required' => 'please enter product name',
-            'file.required' => 'please add image file',
+            'thumb.required' => 'please add image file',
         ];
     }
 }

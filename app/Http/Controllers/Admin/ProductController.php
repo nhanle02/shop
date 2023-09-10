@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Http\Services\Product\ProductAdminService;
@@ -25,11 +26,15 @@ class ProductController extends Controller
         $this->menuService = $menuService;
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
+        $products = $this->ProductAdminService->getAll();
         return view('admin.product.list', [
             'title' => 'Danh sách danh mục sản phẩm',
-            'product' => $this->ProductAdminService->getAll(),
+            'products' => $products,
         ]);
     }
 
@@ -74,11 +79,17 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
-        //
+        $menus = $this->menuService->getAllForSelect();
+        $product = $this->ProductAdminService->getProductById($id);
+        return view('admin.product.edit', [
+            'title' => 'Edit sản phẩm',
+            'menus' => $menus,
+            'product' => $product,
+        ]);
     }
 
     /**
@@ -97,10 +108,11 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        //
+        $this->ProductAdminService->destroy($id);
+        return back()->with('success', 'Delete record successfully!!');
     }
 }

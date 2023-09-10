@@ -8,7 +8,7 @@
         <div class="box-body">
             <div class="form-group">
                 <label for="name">Tên sản phẩm</label>
-                <input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name" placeholder="Enter name product">
+                <input type="text" name="name" value="{{ old('name', $product->name) }}" class="form-control" id="name" placeholder="Enter name product">
             </div>
             <div class="form-group">
                 <label for="menu_id">Danh mục</label>
@@ -17,31 +17,33 @@
                     @foreach ($menus as $menu)
                         <option
                             value="{{ $menu->id }}"
-                            {{ old('menu_id') == $menu->id ? 'selected': '' }}
+                            {{ old('menu_id', $product->menu_id) == $menu->id ? 'selected': '' }}
                         >{{ $menu->name }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group">
                 <label for="description">Mô tả ngắn</label>
-                <textarea type="text" name="description" class="form-control"  placeholder="Enter description">{{ old('description') }}</textarea>
+                <textarea type="text" name="description" class="form-control"  placeholder="Enter description">{{ old('description', $product->description) }}</textarea>
             </div>
             <div class="form-group">
                 <label for="content">Mô tả chi tiết</label>
-                <textarea type="text" name="content" id="content" class="form-control"  placeholder="Enter content">{{ old('content') }}</textarea>
+                <textarea type="text" name="content" id="content" class="form-control"  placeholder="Enter content">{{ old('content', $product->content) }}</textarea>
             </div>
             <div class="form-group">
                 <label for="price">Price</label>
-                <input type="text" name="price" value="{{ old('price') }}" class="form-control" id="price" placeholder="Enter Price ">
+                <input type="text" name="price" value="{{ old('price', $product->price) }}" class="form-control" id="price" placeholder="Enter Price ">
             </div>
             <div class="form-group">
                 <label for="price_sale">Price sale</label>
-                <input type="text" name="price_sale" value="{{ old('price_sale') }}" class="form-control" id="price_sale" placeholder="Enter Price Sale">
+                <input type="text" name="price_sale" value="{{ old('price_sale', $product->price_sale) }}" class="form-control" id="price_sale" placeholder="Enter Price Sale">
             </div>
             <div class="form-group">
                 <label for="upload">Ảnh sản phẩm</label>
                 <input type="file" name="thumb" class="form-control upload-file" />
-                <div class="image-show"></div>
+                <div class="image-show">
+                    <img src="{{ $product->thumb }}" alt="">
+                </div>
 {{--                <input type="file" class="form-control" id="upload">--}}
 {{--                <div id="image_show"></div>--}}
 {{--                <input type="hidden" name="file" id="file">--}}

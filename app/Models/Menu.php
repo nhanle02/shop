@@ -16,4 +16,12 @@ class Menu extends Model
         'content',
         'active'
     ];
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'menu_id');
+    }
 }

@@ -1,7 +1,7 @@
 @extends('admin.main')
 @section('head')
     <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
-@endsection 
+@endsection
 @section('content')
     <form role="form" action="" method="POST">
         <div class="box-body">
@@ -20,8 +20,12 @@
             </div>
             <div class="form-group">
                 <label for="description">Mô tả ngắn</label>
-                <textarea type="text" name="description" class="form-control"  placeholder="Enter description">
-                </textarea>
+                <textarea
+                    type="text"
+                    name="description"
+                    class="form-control"
+                    placeholder="Enter description"
+                ></textarea>
             </div>
             <div class="form-group">
                 <label for="content">Mô tả chi tiết</label>
